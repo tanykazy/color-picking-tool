@@ -1,1 +1,0 @@
-# color-picking-tool
