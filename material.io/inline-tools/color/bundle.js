@@ -37,9 +37,9 @@
             var o = n[r] = {
                 exports: {},
                 id: r,
-                loaded: !1
+                loaded: false
             };
-            return t[r].call(o.exports, o, o.exports, e), o.loaded = !0, o.exports;
+            return t[r].call(o.exports, o, o.exports, e), o.loaded = true, o.exports;
         }
         var n = {};
         return e.m = t, e.c = n, e.p = "", e(0);
@@ -50,7 +50,7 @@
                 "default": t
             };
         }
-        e.__esModule = !0, e.compose = e.applyMiddleware = e.bindActionCreators = e.combineReducers = e.createStore = void 0;
+        e.__esModule = true, e.compose = e.applyMiddleware = e.bindActionCreators = e.combineReducers = e.createStore = void 0;
         var o = n(2);
         var i = r(o);
         var u = n(7);
@@ -92,7 +92,7 @@
             }();
             return "object" == typeof r ? r.v : void 0;
         }
-        e.__esModule = !0, e["default"] = n
+        e.__esModule = true, e["default"] = n
     }, function (t, e, n) {
         "use strict";
         function r(t) {
@@ -111,10 +111,10 @@
                 if ("function" != typeof t) {
                     throw Error("Expected listener to be a function.");
                 }
-                var e = !0;
+                var e = true;
                 return r(), b.push(t), function () {
                     if (e) {
-                        e = !1,
+                        e = false,
                             r();
                         var n = b.indexOf(t);
                         b.splice(n, 1)
@@ -132,10 +132,10 @@
                     throw Error("Reducers may not dispatch actions.");
                 }
                 try {
-                    x = !0,
+                    x = true,
                         v = y(v, t)
                 } finally {
-                    x = !1
+                    x = false
                 }
                 for (var e = h = b, n = 0; e.length > n; n++) {
                     e[n]();
@@ -186,7 +186,7 @@
             var v = e;
             var h = [];
             var b = h;
-            var x = !1;
+            var x = false;
             return s({
                 type: a.INIT
             }), p = {
@@ -196,7 +196,7 @@
                 replaceReducer: d
             }, p[f["default"]] = l, p;
         }
-        e.__esModule = !0,
+        e.__esModule = true,
             e.ActionTypes = void 0,
             e["default"] = o;
         var i = n(4);
@@ -214,15 +214,15 @@
                 throw Error(t)
             } catch (e) { }
         }
-        e.__esModule = !0, e["default"] = n
+        e.__esModule = true, e["default"] = n
     }, function (t, e, n) {
         function r(t) {
             if (!u(t) || l.call(t) != c || i(t)) {
-                return !1;
+                return false;
             }
             var e = o(t);
             if (null === e) {
-                return !0;
+                return true;
             }
             var n = s.call(e, "constructor") && e.constructor;
             return "function" == typeof n && n instanceof n && a.call(n) == d;
@@ -267,7 +267,7 @@
                 };
             };
         }
-        e.__esModule = !0;
+        e.__esModule = true;
         var i = Object.assign || function (t) {
             for (var e = 1; arguments.length > e; e++) {
                 var n = arguments[e];
@@ -301,7 +301,7 @@
             }
             return o;
         }
-        e.__esModule = !0, e["default"] = r
+        e.__esModule = true, e["default"] = r
     }, function (t, e, n) {
         "use strict";
         function r(t) {
@@ -347,7 +347,7 @@
                 if (c) {
                     throw c;
                 }
-                for (var r = !1, i = {}, u = 0; f.length > u; u++) {
+                for (var r = false, i = {}, u = 0; f.length > u; u++) {
                     var a = f[u];
                     var s = n[a];
                     var d = t[a];
@@ -361,7 +361,7 @@
                 return r ? i : t;
             };
         }
-        e.__esModule = !0, e["default"] = u;
+        e.__esModule = true, e["default"] = u;
         var c = n(2);
         var f = n(4);
         var a = (r(f), n(3));
@@ -374,7 +374,7 @@
         t.exports = n
     }, function (t, e) {
         function n(t) {
-            var e = !1;
+            var e = false;
             if (null != t && "function" != typeof t.toString) {
                 try {
                     e = !!(t + "")
@@ -410,10 +410,10 @@ var aa = function (a) {
     var b = 0;
     return function () {
         return b < a.length ? {
-            done: !1,
+            done: false,
             value: a[b++]
         } : {
-            done: !0
+            done: true
         };
     };
 };
@@ -427,8 +427,8 @@ var x = "undefined" != typeof window && window === this ? this : "undefined" != 
 var ia = function (a, b) {
     this.Gc = a;
     ea(this, "description", {
-        configurable: !0,
-        writable: !0,
+        configurable: true,
+        writable: true,
         value: b
     })
 };
@@ -450,8 +450,8 @@ var la = function () {
     var a = x.Symbol.iterator;
     a || (a = x.Symbol.iterator = x.Symbol("Symbol.iterator"));
     "function" != typeof Array.prototype[a] && ea(Array.prototype, a, {
-        configurable: !0,
-        writable: !0,
+        configurable: true,
+        writable: true,
         value: function () {
             return ka(aa(this));
         }
@@ -495,7 +495,7 @@ if ("function" == typeof Object.setPrototypeOf) {
     var pa;
     a: {
         var qa = {
-            A: !0
+            A: true
         };
         var ra = {};
         try {
@@ -503,7 +503,7 @@ if ("function" == typeof Object.setPrototypeOf) {
             pa = ra.A;
             break a
         } catch (a) { }
-        pa = !1
+        pa = false
     }
     oa = pa ? function (a, b) {
         a.__proto__ = b;
@@ -545,8 +545,8 @@ var B = function (a, b) {
         d = c[a];
         b = b(d);
         b != d && null != b && ea(c, a, {
-            configurable: !0,
-            writable: !0,
+            configurable: true,
+            writable: true,
             value: b
         })
     }
@@ -580,20 +580,20 @@ B("WeakMap", function (a) {
     }
     if (function () {
         if (!a || !Object.seal) {
-            return !1;
+            return false;
         }
         try {
             var f = Object.seal({});
             var m = Object.seal({});
             var n = new a([[f, 2], [m, 3]]);
             if (2 != n.get(f) || 3 != n.get(m)) {
-                return !1;
+                return false;
             }
             n.delete(f);
             n.set(m, 4);
             return !n.has(f) && 4 == n.get(m);
         } catch (u) {
-            return !1;
+            return false;
         }
     }()) {
         return a;
@@ -631,7 +631,7 @@ B("WeakMap", function (a) {
         return c(f) && C(f, l) && C(f[l], this.wa);
     };
     g.prototype.delete = function (f) {
-        return c(f) && C(f, l) && C(f[l], this.wa) ? delete f[l][this.wa] : !1;
+        return c(f) && C(f, l) && C(f[l], this.wa) ? delete f[l][this.wa] : false;
     };
     return g;
 });
@@ -645,12 +645,12 @@ var ta = function (a, b) {
                 var e = c++;
                 return {
                     value: b(e, a[e]),
-                    done: !1
+                    done: false
                 };
             }
             d.next = function () {
                 return {
-                    done: !0,
+                    done: true,
                     value: void 0
                 };
             };
@@ -672,7 +672,7 @@ B("Array.prototype.values", function (a) {
 B("Map", function (a) {
     if (function () {
         if (!a || "function" != typeof a || !a.prototype.entries || "function" != typeof Object.seal) {
-            return !1;
+            return false;
         }
         try {
             var g = Object.seal({
@@ -684,17 +684,17 @@ B("Map", function (a) {
             }) || f.set({
                 x: 4
             }, "t") != f || 2 != f.size) {
-                return !1;
+                return false;
             }
             var m = f.entries();
             var n = m.next();
             if (n.done || n.value[0] != g || "s" != n.value[1]) {
-                return !1;
+                return false;
             }
             n = m.next();
-            return n.done || 4 != n.value[0].x || "t" != n.value[1] || !m.next().done ? !1 : !0;
+            return n.done || 4 != n.value[0].x || "t" != n.value[1] || !m.next().done ? false : true;
         } catch (u) {
-            return !1;
+            return false;
         }
     }()) {
         return a;
@@ -738,7 +738,7 @@ B("Map", function (a) {
             g.o.next.W = g.o.W,
             g.o.head = null,
             this.size--,
-            !0) : !1;
+            true) : false;
     };
     c.prototype.clear = function () {
         this.ra = {};
@@ -806,14 +806,14 @@ B("Map", function (a) {
                 }
                 for (; m.next != m.head;) {
                     return m = m.next, {
-                        done: !1,
+                        done: false,
                         value: f(m)
                     };
                 }
                 m = null
             }
             return {
-                done: !0,
+                done: true,
                 value: void 0
             };
         });
@@ -900,11 +900,11 @@ B("Promise", function (a) {
     e.prototype.hb = function () {
         function h(m) {
             return function (n) {
-                f || (f = !0, m.call(g, n))
+                f || (f = true, m.call(g, n))
             };
         }
         var g = this;
-        var f = !1;
+        var f = false;
         return {
             resolve: h(this.sd),
             reject: h(this.ub)
@@ -921,10 +921,10 @@ B("Promise", function (a) {
                     var g = null != h;
                     break a;
                 case "function":
-                    g = !0;
+                    g = true;
                     break a;
                 default:
-                    g = !1
+                    g = false
             }
             g ? this.rd(h) : this.Yb(h)
         }
@@ -1062,10 +1062,10 @@ B("Array.prototype.includes", function (a) {
         for (0 > c && (c = Math.max(c + e, 0)); c < e; c++) {
             var l = d[c];
             if (l === b || Object.is(l, b)) {
-                return !0;
+                return true;
             }
         }
-        return !1;
+        return false;
     };
 });
 var va = this || self;
@@ -1198,7 +1198,7 @@ var Pa = function (a, b) {
     this.wb = a === Na && b || "";
     this.Pc = Oa
 };
-Pa.prototype.ba = !0;
+Pa.prototype.ba = true;
 Pa.prototype.L = function () {
     return this.wb;
 };
@@ -1218,7 +1218,7 @@ var F = function () {
     this.Ta = "";
     this.Mc = Ra
 };
-F.prototype.ba = !0;
+F.prototype.ba = true;
 var Ra = {};
 F.prototype.L = function () {
     return this.Ta.toString();
@@ -1235,7 +1235,7 @@ var Ua = function (a, b) {
     this.tb = a === Sa && b || "";
     this.Rc = Ta
 };
-Ua.prototype.ba = !0;
+Ua.prototype.ba = true;
 Ua.prototype.L = function () {
     return this.tb.toString();
 };
@@ -1248,7 +1248,7 @@ var G = function (a, b) {
     this.sb = a === Va && b || "";
     this.Oc = Wa
 };
-G.prototype.ba = !0;
+G.prototype.ba = true;
 G.prototype.L = function () {
     return this.sb.toString();
 };
@@ -1277,7 +1277,7 @@ var H = function () {
     this.Ua = "";
     this.Nc = $a
 };
-H.prototype.ba = !0;
+H.prototype.ba = true;
 var $a = {};
 H.prototype.L = function () {
     return this.Ua;
@@ -1318,7 +1318,7 @@ var cb = function (a) {
         if (gb.test(a)) {
             return E("String value disallows comments, got: " + a), "zClosurez";
         }
-        for (var c = b = !0, d = 0; d < a.length; d++) {
+        for (var c = b = true, d = 0; d < a.length; d++) {
             var e = a.charAt(d);
             "'" == e && c ? b = !b : '"' == e && b && (c = !c)
         }
@@ -1334,20 +1334,20 @@ var cb = function (a) {
     return ib(a);
 };
 var hb = function (a) {
-    for (var b = !0, c = /^[-_a-zA-Z0-9]$/, d = 0; d < a.length; d++) {
+    for (var b = true, c = /^[-_a-zA-Z0-9]$/, d = 0; d < a.length; d++) {
         var e = a.charAt(d);
         if ("]" == e) {
             if (b) {
-                return !1;
+                return false;
             }
-            b = !0
+            b = true
         } else if ("[" == e) {
             if (!b) {
-                return !1;
+                return false;
             }
-            b = !1
+            b = false
         } else if (!b && !c.test(e)) {
-            return !1;
+            return false;
         }
     }
     return b;
@@ -1370,7 +1370,7 @@ var ib = function (a) {
 var jb = function () {
     this.qb = ""
 };
-jb.prototype.ba = !0;
+jb.prototype.ba = true;
 jb.prototype.L = function () {
     return this.qb;
 };
@@ -1386,7 +1386,7 @@ var K = function () {
     this.Sa = "";
     this.Lc = kb
 };
-K.prototype.ba = !0;
+K.prototype.ba = true;
 K.prototype.L = function () {
     return this.Sa.toString();
 };
@@ -1523,7 +1523,7 @@ var zb = function (a) {
             c[d - 0] = arguments[d];
         }
         c = a.apply(null, ma(c));
-        yb.set(c, !0);
+        yb.set(c, true);
         return c;
     };
 };
@@ -1629,7 +1629,7 @@ var Jb = function (a, b, c) {
     if (Object.hasOwnProperty.call(Hb, a) && (a = Hb[a],
         Object.hasOwnProperty.call(a, b) && (a = a[b],
             a instanceof Array))) {
-        for (var d = null, e = !1, l = 0, h = a.length; l < h; ++l) {
+        for (var d = null, e = false, l = 0, h = a.length; l < h; ++l) {
             var g = a[l];
             var f = g.j;
             if (!f) {
@@ -1640,7 +1640,7 @@ var Jb = function (a, b, c) {
             if (f === g.l) {
                 return g.c;
             }
-            null == f && (e = !0)
+            null == f && (e = true)
         }
         if (e) {
             return null;
@@ -2138,14 +2138,14 @@ var Kb = {
     wbr: 5
 };
 var Mb = [{
-    auto: !0,
-    ltr: !0,
-    rtl: !0
+    auto: true,
+    ltr: true,
+    rtl: true
 }, {
-    async: !0
+    async: true
 }, {
-    _self: !0,
-    _blank: !0
+    _self: true,
+    _blank: true
 }];
 var Nb = {
     "*": {
@@ -2265,7 +2265,7 @@ var fc = function (a) {
         }
     }
     void 0 === d && "undefined" !== typeof console && (d = dc);
-    d && d(!1, "initResin");
+    d && d(false, "initResin");
     var f = {};
     var m = [, {
         D: null,
@@ -2308,10 +2308,10 @@ var fc = function (a) {
                     (q = Nb[q]) && (t = q[p]);
                     if ("number" !== typeof t && ((q = Nb["*"]) && (t = q[p]),
                         "number" !== typeof t)) {
-                        p = !1;
+                        p = false;
                         break a
                     }
-                    p = !0 === Mb[t][String(r).toLowerCase()]
+                    p = true === Mb[t][String(r).toLowerCase()]
                 }
                 return p ? r : "zClosurez";
             },
@@ -2366,7 +2366,7 @@ var fc = function (a) {
                     }
                     z = t.map(cc).filter(Boolean).join(" , ") || f
                 }
-                v && d && d(!0, 'Failed to sanitize attribute value of <%s>: <%s %s="%O">: %s', q, q, p, r, v);
+                v && d && d(true, 'Failed to sanitize attribute value of <%s>: <%s %s="%O">: %s', q, q, p, r, v);
                 return z === f ? "about:invalid#zClosurez" : z;
             },
             F: null,
@@ -2390,7 +2390,7 @@ var fc = function (a) {
                             break;
                         case 3:
                         case 2:
-                            r = !0
+                            r = true
                     }
                 }
                 if (r) {
@@ -2403,7 +2403,7 @@ var fc = function (a) {
                 if (!w && w !== document.all) {
                     return w;
                 }
-                d && d(!0, "Failed to sanitize %s %s%s node to value %O", q.parentElement && q.parentElement.nodeName, "#text", "", w);
+                d && d(true, "Failed to sanitize %s %s%s node to value %O", q.parentElement && q.parentElement.nodeName, "#text", "", w);
                 return "zClosurez";
             };
         }
@@ -2449,7 +2449,7 @@ var fc = function (a) {
                     I === ca && (I = f))
             }
             I === f && (I = ca || "zClosurez",
-                d && d(!0, 'Failed to sanitize attribute of <%s>: <%s %s="%O">', v, v, ba, w));
+                d && d(true, 'Failed to sanitize attribute of <%s>: <%s %s="%O">', v, v, ba, w));
             return I;
         };
     };
@@ -2459,8 +2459,8 @@ var gc = function (a) {
         return f || f === document.all ? e(l, h, g)(f) : f;
     }
     var c = a.UNSAFE_passThruDisallowedValues;
-    var d = !1;
-    null != c && (d = !0 === c);
+    var d = false;
+    null != c && (d = true === c);
     var e = fc(a);
     return d ? function (l, h, g, f) {
         b(l, h, g, f);
@@ -2503,7 +2503,7 @@ var nc = function (a, b) {
     this.element = b;
     var c = [];
     var d = [];
-    b = document.createTreeWalker(b.content, 133, null, !1);
+    b = document.createTreeWalker(b.content, 133, null, false);
     var e = 0;
     var l = -1;
     var h = 0;
@@ -2614,7 +2614,7 @@ oc.prototype.update = function (a) {
     }
 };
 oc.prototype.$c = function () {
-    for (var a = Bb ? this.Wa.element.content.cloneNode(!0) : document.importNode(this.Wa.element.content, !0), b = [], c = this.Wa.H, d = document.createTreeWalker(a, 133, null, !1), e = 0, l = 0, h, g = d.nextNode(); e < c.length;) {
+    for (var a = Bb ? this.Wa.element.content.cloneNode(true) : document.importNode(this.Wa.element.content, true), b = [], c = this.Wa.H, d = document.createTreeWalker(a, 133, null, false), e = 0, l = 0, h, g = d.nextNode(); e < c.length;) {
         h = c[e];
         if (-1 !== h.index) {
             for (; l < h.index;) {
@@ -2676,7 +2676,7 @@ var xc = function (a) {
     return Array.isArray(a) || !(!a || !a[Symbol.iterator]);
 };
 var yc = function (a, b, c) {
-    this.ua = !0;
+    this.ua = true;
     this.element = a;
     this.name = b;
     this.m = c;
@@ -2718,7 +2718,7 @@ yc.prototype.Fa = function () {
 };
 yc.prototype.K = function () {
     if (this.ua) {
-        this.ua = !1;
+        this.ua = false;
         var a = this.Fa();
         a = hc(a, this.name, "attribute", this.element);
         "symbol" === typeof a && (a = String(a));
@@ -2731,7 +2731,7 @@ var zc = function (a) {
 };
 zc.prototype.w = function (a) {
     a === N || wc(a) && a === this.value || (this.value = a,
-        Ab(a) || (this.Ia.ua = !0))
+        Ab(a) || (this.Ia.ua = true))
 };
 zc.prototype.K = function () {
     for (; Ab(this.value);) {
@@ -2863,7 +2863,7 @@ Bc.prototype.Fa = function () {
 };
 Bc.prototype.K = function () {
     if (this.ua) {
-        this.ua = !1;
+        this.ua = false;
         var a = this.Fa();
         a = hc(a, this.name, "property", this.element);
         this.element[this.name] = a
@@ -2873,12 +2873,12 @@ var Cc = function () {
     zc.apply(this, arguments)
 };
 A(Cc, zc);
-var Dc = !1;
+var Dc = false;
 try {
     var Ec = {
         get capture() {
-            Dc = !0;
-            return !1;
+            Dc = true;
+            return false;
         }
     };
     window.addEventListener("test", Ec, Ec);
@@ -2941,7 +2941,7 @@ function Gc(a) {
     c = b.hc.get(d);
     if (void 0 === c) {
         c = document.createElement("template");
-        for (var e = a.m.length - 1, l = "", h = !1, g = 0; g < e; g++) {
+        for (var e = a.m.length - 1, l = "", h = false, g = 0; g < e; g++) {
             var f = a.m[g];
             var m = f.lastIndexOf("\x3c!--");
             h = (-1 < m || h) && -1 === f.indexOf("--\x3e", m + 1);
@@ -3033,29 +3033,29 @@ Mc.prototype.ec = function () { };
 Mc.prototype.Ka = function () { };
 x.Object.defineProperties(Mc, {
     C: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return {};
         }
     },
     m: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return {};
         }
     },
     za: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return {};
         }
     },
     Pb: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return {};
         }
@@ -3104,19 +3104,19 @@ var Oc;
 function Pc() {
     var a = void 0 === a ? window : a;
     if (void 0 === Oc) {
-        var b = !1;
+        var b = false;
         try {
             a.document.addEventListener("test", function () { }, {
                 get passive() {
-                    return b = !0;
+                    return b = true;
                 }
             })
         } catch (c) { }
         Oc = b
     }
     return Oc ? {
-        passive: !0
-    } : !1;
+        passive: true
+    } : false;
 };
 /*
 
@@ -3165,13 +3165,13 @@ var Sc = {
 var Tc;
 function Uc() {
     var a = window;
-    var b = void 0 === b ? !1 : b;
+    var b = void 0 === b ? false : b;
     var c = a.CSS;
     if ("boolean" === typeof Tc && !b) {
         return Tc;
     }
     if (!c || "function" !== typeof c.supports) {
-        return !1;
+        return false;
     }
     var d = c.supports("--css-vars", "yes");
     c = c.supports("(--css-vars: yes)") && c.supports("color", "#00000000");
@@ -3182,7 +3182,7 @@ function Uc() {
         a = a.getComputedStyle(d),
         a = null !== a && "solid" === a.borderTopStyle,
         d.parentNode && d.parentNode.removeChild(d),
-        a = !a) : a = !1;
+        a = !a) : a = false;
     b || (Tc = a);
     return a;
 };
@@ -3192,7 +3192,7 @@ var Xc = [];
 var R = function (a) {
     Mc.call(this, Object.assign({}, R.Pb, a));
     var b = this;
-    this.cb = !1;
+    this.cb = false;
     this.va = this.oa = 0;
     this.Wb = "0";
     this.G = {
@@ -3206,7 +3206,7 @@ var R = function (a) {
     };
     this.Z = Yc();
     this.ad = function () {
-        b.cb = !0;
+        b.cb = true;
         Zc(b)
     };
     this.Db = function (c) {
@@ -3283,11 +3283,11 @@ var cd = function (a) {
 var Yc = function () {
     return {
         eb: void 0,
-        bc: !1,
-        Na: !1,
-        kb: !1,
-        Xa: !1,
-        ea: !1
+        bc: false,
+        Na: false,
+        kb: false,
+        Xa: false,
+        ea: false
     };
 };
 var dd = function (a, b) {
@@ -3328,19 +3328,19 @@ var $c = function (a, b) {
         var c = a.Z;
         if (!c.Na) {
             var d = a.qc;
-            d && void 0 !== b && d.type !== b.type || (c.Na = !0,
+            d && void 0 !== b && d.type !== b.type || (c.Na = true,
                 c.kb = void 0 === b,
                 c.eb = b,
-                c.Xa = c.kb ? !1 : void 0 !== b && ("mousedown" === b.type || "touchstart" === b.type || "pointerdown" === b.type),
+                c.Xa = c.kb ? false : void 0 !== b && ("mousedown" === b.type || "touchstart" === b.type || "pointerdown" === b.type),
                 void 0 !== b && 0 < Xc.length && Xc.some(function (e) {
                     return a.f.Lb(e);
                 }) ? jd(a) : (void 0 !== b && (Xc.push(b.target),
                     id(a, b)),
-                    c.ea = void 0 !== b && "keydown" === b.type ? a.f.mb() : !0,
+                    c.ea = void 0 !== b && "keydown" === b.type ? a.f.mb() : true,
                     c.ea && kd(a),
                     requestAnimationFrame(function () {
                         Xc = [];
-                        c.ea || void 0 === b || " " !== b.key && 32 !== b.keyCode || (c.ea = void 0 !== b && "keydown" === b.type ? a.f.mb() : !0,
+                        c.ea || void 0 === b || " " !== b.key && 32 !== b.keyCode || (c.ea = void 0 !== b && "keydown" === b.type ? a.f.mb() : true,
                             c.ea && kd(a));
                         c.ea || (a.Z = Yc())
                     })))
@@ -3423,7 +3423,7 @@ var Zc = function (a) {
 };
 var md = function (a) {
     a.f.O(R.C.Ya);
-    a.cb = !1;
+    a.cb = false;
     a.f.qa()
 };
 var jd = function (a) {
@@ -3443,7 +3443,7 @@ var ad = function (a) {
         }),
             jd(a)) : (hd(a),
                 requestAnimationFrame(function () {
-                    a.Z.bc = !0;
+                    a.Z.bc = true;
                     var d = c.ea;
                     (c.Xa || d) && Zc(a);
                     jd(a)
@@ -3472,34 +3472,34 @@ var ed = function (a) {
 };
 x.Object.defineProperties(R, {
     C: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return Qc;
         }
     },
     m: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return Rc;
         }
     },
     za: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return Sc;
         }
     },
     Pb: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return {
                 fa: function () { },
                 fb: function () {
-                    return !0;
+                    return true;
                 },
                 qa: function () {
                     return {
@@ -3512,7 +3512,7 @@ x.Object.defineProperties(R, {
                     };
                 },
                 Lb: function () {
-                    return !0;
+                    return true;
                 },
                 Rb: function () { },
                 ta: function () { },
@@ -3524,13 +3524,13 @@ x.Object.defineProperties(R, {
                     };
                 },
                 mb: function () {
-                    return !0;
+                    return true;
                 },
                 gc: function () {
-                    return !0;
+                    return true;
                 },
                 ca: function () {
-                    return !0;
+                    return true;
                 },
                 sc: function () { },
                 Ba: function () { },
@@ -3543,7 +3543,7 @@ x.Object.defineProperties(R, {
 });
 var nd = function () {
     Nc.apply(this, arguments);
-    this.disabled = !1
+    this.disabled = false
 };
 A(nd, Nc);
 var od = function (a) {
@@ -3613,8 +3613,8 @@ nd.prototype.fc = function () {
 };
 x.Object.defineProperties(nd.prototype, {
     Ec: {
-        configurable: !0,
-        enumerable: !0,
+        configurable: true,
+        enumerable: true,
         get: function () {
             return !!this.Fc;
         },
@@ -4177,17 +4177,17 @@ var $d = function (a) {
 var ae = function (a, b) {
     this.la = a;
     this.Aa = b;
-    this.Ga = !1
+    this.Ga = false
 };
 var be = function (a) {
     a.Ga || (document.addEventListener("mousemove", a.la),
         document.addEventListener("mouseup", a.Aa),
-        a.Ga = !0)
+        a.Ga = true)
 };
 ae.prototype.detach = function () {
     this.Ga && (document.removeEventListener("mousemove", this.la),
         document.removeEventListener("mouseup", this.Aa),
-        this.Ga = !1)
+        this.Ga = false)
 };
 var ce = function (a, b) {
     a.preventDefault();
@@ -4271,7 +4271,7 @@ var le = function (a, b, c, d) {
     this.uc = {
         Va: Object.create(null)
     };
-    this.hd = this.lb = !1;
+    this.hd = this.lb = false;
     je(this.uc, this);
     c.subscribe(function () {
         var l = e.store.getState();
@@ -4285,7 +4285,7 @@ le.prototype.I = function () {
     return this.pa ? this.pa : this.pa = Promise.resolve().then(function () {
         if (!a.hd) {
             try {
-                a.lb = !0;
+                a.lb = true;
                 try {
                     var b = a.ga.I(a.store.getState());
                     var c = a.Kb;
@@ -4303,7 +4303,7 @@ le.prototype.I = function () {
                 } catch (l) {
                     va.__materialGlobalErrorHandler(l)
                 } finally {
-                    a.lb = !1
+                    a.lb = false
                 }
                 a.pd(a.Kb)
             } finally {
@@ -4592,7 +4592,7 @@ var Fe = function (a) {
         d = void 0 === d ? [] : d;
         return ke(function (h, g) {
             h.w(c);
-            for (var f = h.S.nextSibling, m, n = !1; f && f !== h.v;) {
+            for (var f = h.S.nextSibling, m, n = false; f && f !== h.v;) {
                 f instanceof Element && b.has(f) && (m = b.get(f)) && (n = Ee(m.Qb, d)) && m.ga.Ka(),
                     f = f.nextSibling;
             }
@@ -4878,7 +4878,7 @@ var mf = function (a, b, c) {
     return a.vc(Q(Oe, c, b, of(a)));
 };
 var of = function (a) {
-    var b = Ge(Q(Ne, !1, function () {
+    var b = Ge(Q(Ne, false, function () {
         a.app.dispatch({
             type: "REMOVE_SECONDARY_COLOR"
         })
@@ -4942,13 +4942,13 @@ function rf(a, b) {
     a = void 0 === a ? {
         color: void 0,
         M: V(X(bf)),
-        jb: !1
+        jb: false
     } : a;
     switch (b.type) {
         case "SHOW_SECONDARY_COLOR_PICKER":
             return Object.assign({}, a, {
                 color: bf,
-                jb: !0
+                jb: true
             });
         case "SET_SECONDARY_COLOR_PICKER":
             return Object.assign({}, a, {
@@ -4968,7 +4968,7 @@ function rf(a, b) {
             return Object.assign({}, a, {
                 color: void 0,
                 M: V(X(bf)),
-                jb: !1
+                jb: false
             });
         default:
             return a;
@@ -4988,10 +4988,10 @@ var uf = ["https://material-io-project.appspot.com", "https://material.io", "htt
 function vf(a, b) {
     var c = a();
     c.start();
-    var d = !1;
+    var d = false;
     window.addEventListener("message", function (e) {
         uf.includes(e.origin);
-        e.data.animate && !d && (d = !0,
+        e.data.animate && !d && (d = true,
             b(c),
             e = window,
             e.gtag && e.gtag("event", "tool view", {
