@@ -3632,7 +3632,7 @@ function S(a, b, c) {
     }
 }
 var T = Math.pow(2, -16);
-var U = function (a, b, c, d) {
+var RGBA = function (a, b, c, d) {
     d = void 0 === d ? 1 : d;
     this.red = a;
     this.green = b;
@@ -3643,23 +3643,23 @@ var U = function (a, b, c, d) {
     S(c, 1, "blue");
     S(d, 1, "alpha");
 };
-U.prototype.na = function () {
+RGBA.prototype.na = function () {
     return "rgba(" + 100 * this.red + "%, " + 100 * this.green + "%, " + (100 * this.blue + "%, " + this.alpha + ")");
 };
 var V = function (a) {
     return pd(Math.round(255 * a.red)) + pd(Math.round(255 * a.green)) + pd(Math.round(255 * a.blue)) + (1 > a.alpha ? pd(Math.round(255 * a.alpha)) : "");
 };
-U.prototype.La = function (a) {
+RGBA.prototype.La = function (a) {
     return Math.abs(this.red - a.red) < T && Math.abs(this.green - a.green) < T && Math.abs(this.blue - a.blue) < T && Math.abs(this.alpha - a.alpha) < T;
 };
 var qd = function (a) {
-    return 1 - a.alpha < T ? a : new U(a.red, a.green, a.blue);
+    return 1 - a.alpha < T ? a : new RGBA(a.red, a.green, a.blue);
 };
 var rd = function (a, b) {
     var c = qd(b);
     if (!(1 - a.alpha < T)) {
         var d = c.alpha * (1 - a.alpha);
-        a = new U(a.red * a.alpha + c.red * d, a.green * a.alpha + c.green * d, a.blue * a.alpha + c.blue * d, a.alpha + d);
+        a = new RGBA(a.red * a.alpha + c.red * d, a.green * a.alpha + c.green * d, a.blue * a.alpha + c.blue * d, a.alpha + d);
     }
     a = .2126 * W(a.red) + .7152 * W(a.green) + .0722 * W(a.blue);
     b = .2126 * W(b.red) + .7152 * W(b.green) + .0722 * W(b.blue);
@@ -3695,7 +3695,7 @@ var sd = function (a, b, c, d) {
             e += c,
                 d += h;
     }
-    return new U(e, l, d, b);
+    return new RGBA(e, l, d, b);
 };
 var td = function (a) {
     var b = (1 - Math.abs(2 * a.g - 1)) * a.saturation;
@@ -3723,10 +3723,10 @@ var vd = function (a) {
     var c = ud(b[1]) / 255;
     var d = ud(b[2]) / 255;
     b = ud(b[3]) / 255;
-    return new U(a, c, d, b);
+    return new RGBA(a, c, d, b);
 };
-var wd = new U(1, 1, 1);
-var xd = new U(0, 0, 0);
+var wd = new RGBA(1, 1, 1);
+var xd = new RGBA(0, 0, 0);
 function ud(a) {
     if (!/^[a-fA-F0-9]+$/.test(a)) {
         throw Error("Invalid hex string: " + a);
@@ -4064,17 +4064,17 @@ var Kd = [[
 ]];
 var Ld = [2.048875457, 5.124792061, 8.751659557, 12.07628774, 13.91449542, 15.92738893, 15.46585818, 15.09779227, 15.13738673, 15.09818372];
 var Md = [1.762442714, 4.213532634, 7.395827458, 11.07174158, 13.89634504, 16.37591477, 16.27071136, 16.54160806, 17.35916727, 19.88410864];
-var Nd = new U(1, 1, 1, 1);
-var Od = new U(1, 1, 1, .6);
-var Pd = new U(1, 1, 1, .38);
+var Nd = new RGBA(1, 1, 1, 1);
+var Od = new RGBA(1, 1, 1, .6);
+var Pd = new RGBA(1, 1, 1, .38);
 var Qd = {};
 var Rd = (Qd.HIGH = Nd,
     Qd.MEDIUM = Od,
     Qd.DISABLED = Pd,
     Qd);
-var Sd = new U(0, 0, 0, .87);
-var Td = new U(0, 0, 0, .6);
-var Ud = new U(0, 0, 0, .38);
+var Sd = new RGBA(0, 0, 0, .87);
+var Td = new RGBA(0, 0, 0, .6);
+var Ud = new RGBA(0, 0, 0, .38);
 var Vd = {};
 var Wd = (Vd.HIGH = Sd,
     Vd.MEDIUM = Td,
@@ -4120,7 +4120,7 @@ function Z(a) {
         r = .95047 * Id(z + t.A / 500);
         v = 1 * Id(z);
         z = 1.08883 * Id(z - t.B / 200);
-        return new U(L(Hd(3.2404542 * r + -1.5371385 * v + -.4985314 * z), 0, 1), L(Hd(-.969266 * r + 1.8760108 * v + .041556 * z), 0, 1), L(Hd(.0556434 * r + -.2040259 * v + 1.0572252 * z), 0, 1), t.alpha);
+        return new RGBA(L(Hd(3.2404542 * r + -1.5371385 * v + -.4985314 * z), 0, 1), L(Hd(-.969266 * r + 1.8760108 * v + .041556 * z), 0, 1), L(Hd(.0556434 * r + -.2040259 * v + 1.0572252 * z), 0, 1), t.alpha);
     });
 }
 function Yd(a, b) {
@@ -4708,9 +4708,9 @@ var df = function (a, b, c, d) {
         var m = void 0 === m ? 1 : m;
         for (var n = qd(a), u = f - .01, q = m; .01 < q - u;) {
             var p = (u + q) / 2;
-            4.5 > rd(Math.abs(g.alpha - p) < T ? g : new U(g.red, g.green, g.blue, p), n) ? u = p : q = p;
+            4.5 > rd(Math.abs(g.alpha - p) < T ? g : new RGBA(g.red, g.green, g.blue, p), n) ? u = p : q = p;
         }
-        m = (new U(g.red, g.green, g.blue, L(q, f, m))).na();
+        m = (new RGBA(g.red, g.green, g.blue, L(q, f, m))).na();
     } else {
         m = "rgba(255, 255, 255, 0.6)";
     }
@@ -4783,7 +4783,7 @@ var hf = function (a, b) {
     return Q(Te, c);
 };
 var jf = function (a, b, c) {
-    c || (c = new U(1, 1, 1));
+    c || (c = new RGBA(1, 1, 1));
     var d = [];
     d.push(ff(a, "Primary", [Z(b)], [b], "PRIMARY"));
     d.push(ff(a, "Secondary", [Z(c)], [c], "SECONDARY"));
