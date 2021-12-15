@@ -406,30 +406,30 @@
 });
 
 var k;
-var aa = function (a) {
-    var b = 0;
+var next = function (iterator) {
+    var index = 0;
     return function () {
-        return b < a.length ? {
+        return index < iterator.length ? {
             done: false,
-            value: a[b++]
+            value: iterator[index++]
         } : {
             done: true
         };
     };
 };
-var ea = "function" == typeof Object.defineProperties ? Object.defineProperty : function (a, b, c) {
-    a != Array.prototype && a != Object.prototype && (a[b] = c.value);
+var defineProperty = "function" == typeof Object.defineProperties ? Object.defineProperty : function (object, property, descriptor) {
+    object != Array.prototype && object != Object.prototype && (object[property] = descriptor.value);
 };
 var x = "undefined" != typeof window && window === this ? this : "undefined" != typeof global && null != global ? global : this, fa = function () {
     fa = function () { };
     x.Symbol || (x.Symbol = ha);
 };
-var ia = function (a, b) {
+var ia = function (a, value) {
     this.Gc = a;
-    ea(this, "description", {
+    defineProperty(this, "description", {
         configurable: true,
         writable: true,
-        value: b
+        value: value
     });
 };
 ia.prototype.toString = function () {
@@ -449,11 +449,11 @@ var la = function () {
     fa();
     var a = x.Symbol.iterator;
     a || (a = x.Symbol.iterator = x.Symbol("Symbol.iterator"));
-    "function" != typeof Array.prototype[a] && ea(Array.prototype, a, {
+    "function" != typeof Array.prototype[a] && defineProperty(Array.prototype, a, {
         configurable: true,
         writable: true,
         value: function () {
-            return ka(aa(this));
+            return ka(next(this));
         }
     });
     la = function () { };
@@ -471,7 +471,7 @@ var ka = function (a) {
 var y = function (a) {
     var b = "undefined" != typeof Symbol && Symbol.iterator && a[Symbol.iterator];
     return b ? b.call(a) : {
-        next: aa(a)
+        next: next(a)
     };
 };
 var ma = function (a) {
@@ -483,10 +483,10 @@ var ma = function (a) {
     }
     return a;
 };
-var na = "function" == typeof Object.create ? Object.create : function (a) {
-    var b = function () { };
-    b.prototype = a;
-    return new b;
+var create = "function" == typeof Object.create ? Object.create : function (proto) {
+    var o = function () { };
+    o.prototype = proto;
+    return new o;
 };
 var oa;
 if ("function" == typeof Object.setPrototypeOf) {
@@ -515,7 +515,7 @@ if ("function" == typeof Object.setPrototypeOf) {
 }
 var sa = oa;
 var A = function (a, b) {
-    a.prototype = na(b.prototype);
+    a.prototype = create(b.prototype);
     a.prototype.constructor = a;
     if (sa) {
         sa(a, b);
@@ -544,7 +544,7 @@ var B = function (a, b) {
         a = a[a.length - 1];
         d = c[a];
         b = b(d);
-        b != d && null != b && ea(c, a, {
+        b != d && null != b && defineProperty(c, a, {
             configurable: true,
             writable: true,
             value: b
@@ -563,7 +563,7 @@ B("WeakMap", function (a) {
     function d(f) {
         if (!C(f, l)) {
             var m = new b;
-            ea(f, l, {
+            defineProperty(f, l, {
                 value: m
             });
         }
@@ -3626,40 +3626,40 @@ x.Object.defineProperties(nd.prototype, {
         }
     }
 });
-function S(a, b, c) {
-    if (isNaN(a) || 0 > a || a > b) {
-        throw new RangeError(a + " for " + c + " is not between 0 and " + b);
+function validate_color(value, max, color) {
+    if (isNaN(value) || 0 > value || value > max) {
+        throw new RangeError(value + " for " + color + " is not between 0 and " + max);
     }
 }
 var T = Math.pow(2, -16);
-var RGBA = function (a, b, c, d) {
-    d = void 0 === d ? 1 : d;
-    this.red = a;
-    this.green = b;
-    this.blue = c;
-    this.alpha = d;
-    S(a, 1, "red");
-    S(b, 1, "green");
-    S(c, 1, "blue");
-    S(d, 1, "alpha");
+var RGBA = function (red, green, blue, alpha) {
+    alpha = void 0 === alpha ? 1 : alpha;
+    this.red = red;
+    this.green = green;
+    this.blue = blue;
+    this.alpha = alpha;
+    validate_color(red, 1, "red");
+    validate_color(green, 1, "green");
+    validate_color(blue, 1, "blue");
+    validate_color(alpha, 1, "alpha");
 };
-RGBA.prototype.na = function () {
+RGBA.prototype.toFunctionalNotation = function () {
     return "rgba(" + 100 * this.red + "%, " + 100 * this.green + "%, " + (100 * this.blue + "%, " + this.alpha + ")");
 };
 var V = function (a) {
-    return pd(Math.round(255 * a.red)) + pd(Math.round(255 * a.green)) + pd(Math.round(255 * a.blue)) + (1 > a.alpha ? pd(Math.round(255 * a.alpha)) : "");
+    return hex(Math.round(255 * a.red)) + hex(Math.round(255 * a.green)) + hex(Math.round(255 * a.blue)) + (1 > a.alpha ? hex(Math.round(255 * a.alpha)) : "");
 };
 RGBA.prototype.La = function (a) {
     return Math.abs(this.red - a.red) < T && Math.abs(this.green - a.green) < T && Math.abs(this.blue - a.blue) < T && Math.abs(this.alpha - a.alpha) < T;
 };
-var qd = function (a) {
-    return 1 - a.alpha < T ? a : new RGBA(a.red, a.green, a.blue);
+var qd = function (rgba) {
+    return 1 - rgba.alpha < T ? rgba : new RGBA(rgba.red, rgba.green, rgba.blue);
 };
 var rd = function (a, b) {
-    var c = qd(b);
+    var rgba = qd(b);
     if (!(1 - a.alpha < T)) {
-        var d = c.alpha * (1 - a.alpha);
-        a = new RGBA(a.red * a.alpha + c.red * d, a.green * a.alpha + c.green * d, a.blue * a.alpha + c.blue * d, a.alpha + d);
+        var d = rgba.alpha * (1 - a.alpha);
+        a = new RGBA(a.red * a.alpha + rgba.red * d, a.green * a.alpha + rgba.green * d, a.blue * a.alpha + rgba.blue * d, a.alpha + d);
     }
     a = .2126 * W(a.red) + .7152 * W(a.green) + .0722 * W(a.blue);
     b = .2126 * W(b.red) + .7152 * W(b.green) + .0722 * W(b.blue);
@@ -3705,54 +3705,54 @@ var X = function (a) {
     var b = a.value * a.saturation;
     return sd(a.hue, a.alpha, b, Math.max(0, a.value - b));
 };
-var vd = function (a) {
-    if (!/^[a-fA-F0-9]{3,8}$/.test(a)) {
-        throw Error("Invalid hex color string: " + a);
+var hexcolor2rgba = function (hexcolor) {
+    if (!/^[a-fA-F0-9]{3,8}$/.test(hexcolor)) {
+        throw Error("Invalid hex color string: " + hexcolor);
     }
-    if (3 === a.length || 4 === a.length) {
-        var b = /^(.)(.)(.)(.)?$/.exec(a).slice(1, 5).map(function (e) {
+    if (3 === hexcolor.length || 4 === hexcolor.length) {
+        var b = /^(.)(.)(.)(.)?$/.exec(hexcolor).slice(1, 5).map(function (e) {
             return e ? e + e : "ff";
         });
-    } else if (6 === a.length || 8 === a.length) {
-        b = /^(..)(..)(..)(..)?$/.exec(a).slice(1, 5),
+    } else if (6 === hexcolor.length || 8 === hexcolor.length) {
+        b = /^(..)(..)(..)(..)?$/.exec(hexcolor).slice(1, 5),
             void 0 === b[3] && (b[3] = "ff");
     } else {
-        throw Error("Invalid hex color string: " + a);
+        throw Error("Invalid hex color string: " + hexcolor);
     }
-    a = ud(b[0]) / 255;
-    var c = ud(b[1]) / 255;
-    var d = ud(b[2]) / 255;
-    b = ud(b[3]) / 255;
-    return new RGBA(a, c, d, b);
+    hexcolor = hex2int(b[0]) / 255;
+    var c = hex2int(b[1]) / 255;
+    var d = hex2int(b[2]) / 255;
+    b = hex2int(b[3]) / 255;
+    return new RGBA(hexcolor, c, d, b);
 };
-var wd = new RGBA(1, 1, 1);
-var xd = new RGBA(0, 0, 0);
-function ud(a) {
-    if (!/^[a-fA-F0-9]+$/.test(a)) {
-        throw Error("Invalid hex string: " + a);
+var white = new RGBA(1, 1, 1);
+var black = new RGBA(0, 0, 0);
+function hex2int(hexstr) {
+    if (!/^[a-fA-F0-9]+$/.test(hexstr)) {
+        throw Error("Invalid hex string: " + hexstr);
     }
-    return parseInt(a, 16);
+    return parseInt(hexstr, 16);
 }
-function pd(a) {
-    a = a.toString(16);
-    return 2 <= a.length ? a : "0" + a;
+function hex(n) {
+    n = n.toString(16);
+    return 2 <= n.length ? n : "0" + n;
 }
-var yd = function (a, b, c, d) {
-    d = void 0 === d ? 1 : d;
-    this.hue = a;
-    this.saturation = b;
-    this.g = c;
-    this.alpha = d;
-    S(a, 360, "hue");
-    S(b, 1, "saturation");
-    S(c, 1, "lightness");
-    S(d, 1, "alpha");
+var hsla = function (hue, saturation, g, alpha) {
+    alpha = void 0 === alpha ? 1 : alpha;
+    this.hue = hue;
+    this.saturation = saturation;
+    this.g = g;
+    this.alpha = alpha;
+    validate_color(hue, 360, "hue");
+    validate_color(saturation, 1, "saturation");
+    validate_color(g, 1, "lightness");
+    validate_color(alpha, 1, "alpha");
 };
-yd.prototype.na = function () {
+hsla.prototype.toFunctionalNotation = function () {
     return "hsla(" + this.hue + ", " + 100 * this.saturation + "%, " + (100 * this.g + "%, " + this.alpha + ")");
 };
-yd.prototype.rotate = function (a) {
-    return new yd((this.hue + a + 360) % 360, this.saturation, this.g, this.alpha);
+hsla.prototype.rotate = function (a) {
+    return new hsla((this.hue + a + 360) % 360, this.saturation, this.g, this.alpha);
 };
 var zd = function (a) {
     var b = Math.max(a.red, a.green, a.blue);
@@ -3763,44 +3763,44 @@ var zd = function (a) {
     b - c > T && (b === a.red ? d = 60 * (a.green - a.blue) / (b - c) : b === a.green ? d = 60 * (a.blue - a.red) / (b - c) + 120 : b === a.blue && (d = 60 * (a.red - a.green) / (b - c) + 240),
         e = 0 < l && .5 >= l ? L((b - c) / (2 * l), 0, 1) : L((b - c) / (2 - 2 * l), 0, 1));
     d = Math.round(d + 360) % 360;
-    return new yd(d, e, l, a.alpha);
+    return new hsla(d, e, l, a.alpha);
 };
 var Ad = function (a) {
     var b = L((2 - a.saturation) * a.value / 2, 0, 1);
     var c = 0;
     0 < b && 1 > b && (c = a.saturation * a.value / (.5 > b ? 2 * b : 2 - 2 * b));
     c = L(c, 0, 1);
-    return new yd(a.hue, c, b, a.alpha);
+    return new hsla(a.hue, c, b, a.alpha);
 };
-var Bd = function (a, b, c, d) {
-    d = void 0 === d ? 1 : d;
-    this.hue = a;
-    this.saturation = b;
-    this.value = c;
-    this.alpha = d;
-    S(a, 360, "hue");
-    S(b, 1, "saturation");
-    S(c, 1, "value");
-    S(d, 1, "alpha");
+var Bd = function (hue, saturation, value, alpha) {
+    alpha = void 0 === alpha ? 1 : alpha;
+    this.hue = hue;
+    this.saturation = saturation;
+    this.value = value;
+    this.alpha = alpha;
+    validate_color(hue, 360, "hue");
+    validate_color(saturation, 1, "saturation");
+    validate_color(value, 1, "value");
+    validate_color(alpha, 1, "alpha");
 };
-var Cd = function (a) {
-    var b = Math.max(a.red, a.green, a.blue);
-    var c = Math.min(a.red, a.green, a.blue);
+var rgba2Bd = function (a) {
+    var max = Math.max(a.red, a.green, a.blue);
+    var min = Math.min(a.red, a.green, a.blue);
     var d = 0;
     var e = 0;
-    b - c > T && (e = (b - c) / b,
-        b === a.red ? d = 60 * (a.green - a.blue) / (b - c) : b === a.green ? d = 60 * (a.blue - a.red) / (b - c) + 120 : b === a.blue && (d = 60 * (a.red - a.green) / (b - c) + 240));
+    max - min > T && (e = (max - min) / max,
+        max === a.red ? d = 60 * (a.green - a.blue) / (max - min) : max === a.green ? d = 60 * (a.blue - a.red) / (max - min) + 120 : max === a.blue && (d = 60 * (a.red - a.green) / (max - min) + 240));
     d = Math.round(d + 360) % 360;
-    return new Bd(d, e, b, a.alpha);
+    return new Bd(d, e, max, a.alpha);
 };
-var Y = function (a, b, c, d) {
-    d = void 0 === d ? 1 : d;
-    this.g = a;
+var Y = function (lightness, b, c, alpha) {
+    alpha = void 0 === alpha ? 1 : alpha;
+    this.g = lightness;
     this.A = b;
     this.B = c;
-    this.alpha = d;
-    S(a, Number.MAX_VALUE, "lightness");
-    S(d, 1, "alpha");
+    this.alpha = alpha;
+    validate_color(lightness, Number.MAX_VALUE, "lightness");
+    validate_color(alpha, 1, "alpha");
 };
 Y.prototype.La = function (a) {
     return 1E-4 > Math.abs(this.g - a.g) && 1E-4 > Math.abs(this.A - a.A) && 1E-4 > Math.abs(this.B - a.B) && Math.abs(this.alpha - a.alpha) < T;
@@ -3812,16 +3812,16 @@ var Ed = function (a) {
     var e = .2126729 * b + .7151522 * c + .072175 * d;
     return new Y(116 * Dd(e) - 16, 500 * (Dd((.4124564 * b + .3575761 * c + .1804375 * d) / .95047) - Dd(e)), 200 * (Dd(e) - Dd((.0193339 * b + .119192 * c + .9503041 * d) / 1.08883)), a.alpha);
 };
-var Fd = function (a, b, c, d) {
-    d = void 0 === d ? 1 : d;
-    this.g = a;
-    this.T = b;
-    this.hue = c;
-    this.alpha = d;
-    S(a, Number.MAX_VALUE, "lightness");
-    S(b, Number.MAX_VALUE, "chroma");
-    S(c, 360, "hue");
-    S(d, 1, "alpha");
+var Fd = function (lightness, chroma, hue, alpha) {
+    alpha = void 0 === alpha ? 1 : alpha;
+    this.g = lightness;
+    this.T = chroma;
+    this.hue = hue;
+    this.alpha = alpha;
+    validate_color(lightness, Number.MAX_VALUE, "lightness");
+    validate_color(chroma, Number.MAX_VALUE, "chroma");
+    validate_color(hue, 360, "hue");
+    validate_color(alpha, 1, "alpha");
 };
 Fd.prototype.La = function (a) {
     return 1E-4 > Math.abs(this.g - a.g) && 1E-4 > Math.abs(this.T - a.T) && 1E-4 > Math.abs(this.hue - a.hue) && Math.abs(this.alpha - a.alpha) < T;
@@ -4082,11 +4082,11 @@ var Wd = (Vd.HIGH = Sd,
     Vd);
 function Xd(a) {
     var b = void 0 === b ? 4.5 : b;
-    var c = rd(wd, a);
+    var c = rd(white, a);
     if (c >= b) {
         return 0;
     }
-    a = rd(xd, a);
+    a = rd(black, a);
     return a >= b ? 1 : c > a ? 0 : 1;
 };
 function Z(a) {
@@ -4159,7 +4159,7 @@ function Yd(a, b) {
         ed: e
     };
 };
-Z(wd);
+Z(white);
 va.__materialGlobalErrorHandler || (va.__materialGlobalErrorHandler = function (a) {
     throw a;
 });
@@ -4233,14 +4233,14 @@ function ge(a) {
 }
 function he(a, b, c, d, e) {
     var l = J({
-        "background-color": a.na()
+        "background-color": a.toFunctionalNotation()
     });
     b ? (b = J({
         left: "50%",
         top: "50%"
     }),
         a = J({
-            "background-color": a.na()
+            "background-color": a.toFunctionalNotation()
         }),
         a = Q(de, "color-palette-picker__thumb", b, "color-palette-picker__thumb__inner", a)) : a = void 0;
     return Q(ee, d + " " + c, l, e, a);
@@ -4569,7 +4569,7 @@ function Ce(a) {
         top: a.Dc + "%"
     });
     c = J({
-        "background-color": c.na()
+        "background-color": c.toFunctionalNotation()
     });
     return Q(we, b, a, b + "__inner", c);
 };
@@ -4679,8 +4679,8 @@ var Ye = ['<div class="color-palette__ripple mdc-ripple-surface"></div>'];
 Ye.raw = Ye.slice();
 var Ze = "900 800 700 600 500 400 300 200 100 50".split(" ");
 var $e = /^[a-fA-F0-9]{3,6}$/;
-var af = Cd(vd("6202EE"));
-var bf = Cd(vd("FFF"));
+var af = rgba2Bd(hexcolor2rgba("6202EE"));
+var bf = rgba2Bd(hexcolor2rgba("FFF"));
 var cf = function (a) {
     this.app = a;
     var b = this;
@@ -4701,16 +4701,16 @@ var df = function (a, b, c, d) {
     b = b && d ? d.charAt(0) : "";
     d = 0 === Xd(a) ? "ripple-white" : "";
     var l = Ge(Q(Ye));
-    var h = a.na();
+    var h = a.toFunctionalNotation();
     if (a) {
         var g = 0 === Xd(a) ? Rd.HIGH : Wd.HIGH;
         var f = g.alpha;
         var m = void 0 === m ? 1 : m;
-        for (var n = qd(a), u = f - .01, q = m; .01 < q - u;) {
+        for (var rgba = qd(a), u = f - .01, q = m; .01 < q - u;) {
             var p = (u + q) / 2;
-            4.5 > rd(Math.abs(g.alpha - p) < T ? g : new RGBA(g.red, g.green, g.blue, p), n) ? u = p : q = p;
+            4.5 > rd(Math.abs(g.alpha - p) < T ? g : new RGBA(g.red, g.green, g.blue, p), rgba) ? u = p : q = p;
         }
-        m = (new RGBA(g.red, g.green, g.blue, L(q, f, m))).na();
+        m = (new RGBA(g.red, g.green, g.blue, L(q, f, m))).toFunctionalNotation();
     } else {
         m = "rgba(255, 255, 255, 0.6)";
     }
@@ -4816,7 +4816,7 @@ var kf = function (a, b) {
         lc: function (e) {
             !$e.test(e) || 3 !== e.length && 6 !== e.length || a.app.dispatch({
                 type: "SET_PRIMARY_HEX_COLOR",
-                color: Cd(vd(e))
+                color: rgba2Bd(hexcolor2rgba(e))
             });
             a.app.dispatch({
                 type: "SET_PRIMARY_HEX_INPUT",
@@ -4828,7 +4828,7 @@ var kf = function (a, b) {
         oc: "Primary",
         nc: Z(c),
         kc: function (e, l) {
-            d(Cd(e[l]));
+            d(rgba2Bd(e[l]));
         },
         selectedColor: c
     });
@@ -4858,7 +4858,7 @@ var mf = function (a, b, c) {
         lc: function (l) {
             !$e.test(l) || 3 !== l.length && 6 !== l.length || a.app.dispatch({
                 type: "SET_SECONDARY_HEX_COLOR",
-                color: Cd(vd(l))
+                color: rgba2Bd(hexcolor2rgba(l))
             });
             a.app.dispatch({
                 type: "SET_SECONDARY_HEX_INPUT",
@@ -4870,7 +4870,7 @@ var mf = function (a, b, c) {
         oc: "Secondary",
         nc: e,
         kc: function (l, h) {
-            d(Cd(l[h]));
+            d(rgba2Bd(l[h]));
         },
         selectedColor: c
     });
@@ -5018,16 +5018,16 @@ function wf() {
     };
 };
 function xf() {
-    var a = container;
+    var container = root_container;
     vf(function () {
-        a.classList.add("inline-tool-initializing");
-        return new sf(a, wf());
+        container.classList.add("inline-tool-initializing");
+        return new sf(container, wf());
     }, function (b) {
         b.Eb.dispatch(qe(af));
         Promise.resolve().then(function () {
-            a.classList.remove("inline-tool-initializing")
+            container.classList.remove("inline-tool-initializing")
         });
     });
 }
-var container = document.querySelector("#root-container");
-container && xf();
+var root_container = document.querySelector("#root-container");
+root_container && xf();
