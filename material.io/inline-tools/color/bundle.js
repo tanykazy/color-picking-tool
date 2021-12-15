@@ -5018,7 +5018,7 @@ function wf() {
     };
 };
 function xf() {
-    var a = yf;
+    var a = container;
     vf(function () {
         a.classList.add("inline-tool-initializing");
         return new sf(a, wf());
@@ -5029,5 +5029,5 @@ function xf() {
         });
     });
 }
-var yf = document.querySelector("#root-container");
-yf && xf();
+var container = document.querySelector("#root-container");
+container && xf();
