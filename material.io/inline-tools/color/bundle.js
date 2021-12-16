@@ -4794,7 +4794,7 @@ var nf = function (a, b) {
     b = b.Ca;
     var d = X(c.color);
     var e = b.color && X(b.color);
-    d = "/tools/color/#!/?view.left=0&view.right=0&primary.color=" + V(d) + (e ? "&secondary.color=" + V(e) : "");
+    d = "https://material.io/tools/color/#!/?view.left=0&view.right=0&primary.color=" + V(d) + (e ? "&secondary.color=" + V(e) : "");
     c = kf(a, c);
     e = lf(a);
     b = b.jb ? mf(a, b, b.color) : a.vc();
