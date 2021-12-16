@@ -420,7 +420,8 @@ var next = function (iterator) {
 var defineProperty = "function" == typeof Object.defineProperties ? Object.defineProperty : function (object, property, descriptor) {
     object != Array.prototype && object != Object.prototype && (object[property] = descriptor.value);
 };
-var x = "undefined" != typeof window && window === this ? this : "undefined" != typeof global && null != global ? global : this, fa = function () {
+var x = "undefined" != typeof window && window === this ? this : "undefined" != typeof global && null != global ? global : this;
+var fa = function () {
     fa = function () { };
     x.Symbol || (x.Symbol = ha);
 };
