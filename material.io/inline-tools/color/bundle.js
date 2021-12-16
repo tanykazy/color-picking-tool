@@ -1120,7 +1120,7 @@ var ya = function (a, b, c) {
     ya = Function.prototype.bind && -1 != Function.prototype.bind.toString().indexOf("native code") ? wa : xa;
     return ya.apply(null, arguments);
 };
-var za = Date.now || function () {
+var now = Date.now || function () {
     return +new Date;
 };
 var Aa = function (a, b) {
@@ -1135,26 +1135,26 @@ var Aa = function (a, b) {
         return b.prototype[e].apply(d, h);
     }
 };
-var Ba = function (a) {
+var customerror = function (a) {
     if (Error.captureStackTrace) {
-        Error.captureStackTrace(this, Ba);
+        Error.captureStackTrace(this, customerror);
     } else {
         var b = Error().stack;
         b && (this.stack = b);
     }
     a && (this.message = String(a));
 };
-Aa(Ba, Error);
-Ba.prototype.name = "CustomError";
-var Ca = function (a, b) {
+Aa(customerror, Error);
+customerror.prototype.name = "CustomError";
+var assertionerror = function (a, b) {
     a = a.split("%s");
     for (var c = "", d = a.length - 1, e = 0; e < d; e++) {
         c += a[e] + (e < b.length ? b[e] : "%s");
     }
-    Ba.call(this, c + a[d]);
+    customerror.call(this, c + a[d]);
 };
-Aa(Ca, Ba);
-Ca.prototype.name = "AssertionError";
+Aa(assertionerror, customerror);
+assertionerror.prototype.name = "AssertionError";
 var Da = function (a, b, c) {
     if (!a) {
         var d = "Assertion failed";
@@ -1162,11 +1162,11 @@ var Da = function (a, b, c) {
             d += ": " + b;
             var e = Array.prototype.slice.call(arguments, 2);
         }
-        throw new Ca("" + d, e || []);
+        throw new assertionerror("" + d, e || []);
     }
 };
 var E = function (a, b) {
-    throw new Ca("Failure" + (a ? ": " + a : ""), Array.prototype.slice.call(arguments, 1));
+    throw new assertionerror("Failure" + (a ? ": " + a : ""), Array.prototype.slice.call(arguments, 1));
 };
 var Ea = Array.prototype.map ? function (a, b) {
     Da(null != a.length);
@@ -1308,7 +1308,7 @@ var bb = function (a) {
     }
     a = a instanceof Pa ? Qa(a) : cb(String(a));
     if (/[{;}]/.test(a)) {
-        throw new Ca("Value does not allow [{;}], got: %s.", [a]);
+        throw new assertionerror("Value does not allow [{;}], got: %s.", [a]);
     }
     return a;
 };
@@ -1414,7 +1414,7 @@ nb.prototype.Vb = null;
 var ob = 0;
 nb.prototype.reset = function (a, b, c, d, e) {
     "number" == typeof e || ob++;
-    d || za();
+    d || now();
     this.ya = a;
     delete this.Vb;
 };
@@ -2211,8 +2211,8 @@ var Ob = null;
 var Wb = {};
 var Xb = /^(?!(?:annotation-xml|color-profile|font-face|font-face(?:-(?:src|uri|format|name))?|missing-glyph)$)[a-z][a-z.0-9_\u00b7\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u037d\u200c\u200d\u203f-\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\udfff\uf900-\ufdcf\ufdf0-\ufffd]*-[\-a-z.0-9_\u00b7\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u037d\u200c\u200d\u203f-\u2040\u2070-\u218f\u2c00-\u2fef\u3001-\udfff\uf900-\ufdcf\ufdf0-\ufffd]*$/;
 var Yb = function (a, b) {
-    var c = window.customElements;
-    return c && c.get(a) || Wb[a] === Wb ? 2 : "HTMLUnknownElement" === b.name ? 1 : "HTMLElement" === b.name && Xb.test(a) ? 3 : 0;
+    var customElements = window.customElements;
+    return customElements && customElements.get(a) || Wb[a] === Wb ? 2 : "HTMLUnknownElement" === b.name ? 1 : "HTMLElement" === b.name && Xb.test(a) ? 3 : 0;
 };
 var Zb = /(?!,)([^\t\n\f\r ]+)(?:[\t\n\f\r ]+([.0-9+\-]+[a-z]?))?/gi;
 var $b = /[\t\n\f\r ]+/;
@@ -2249,11 +2249,11 @@ var fc = function (a) {
         return !p || /[\[\{]/.test(q) ? null : p;
     }
     function c(q) {
-        var p = q.localName;
-        if (!q.getAttribute("is") && 2 === Yb(p, q.constructor)) {
-            return u;
+        var localName = q.localName;
+        if (!q.getAttribute("is") && 2 === Yb(localName, q.constructor)) {
+            return element;
         }
-        (q = n[p]) || (q = n[p] = document.createElement(p));
+        (q = n[localName]) || (q = n[localName] = document.createElement(localName));
         return q;
     }
     var d = a.reportHandler || void 0;
@@ -2374,18 +2374,18 @@ var fc = function (a) {
             R: null
         }];
     var n = {};
-    var u = document.createElement("polyresinuncustomized");
+    var element = document.createElement("polyresinuncustomized");
     return function (q, p, r) {
-        var t = q.nodeType;
-        if (t !== Node.ELEMENT_NODE) {
-            if (t === Node.TEXT_NODE) {
+        var nodeType = q.nodeType;
+        if (nodeType !== Node.ELEMENT_NODE) {
+            if (nodeType === Node.TEXT_NODE) {
                 p = q.parentElement;
                 r = !p;
                 if (p && p.nodeType === Node.ELEMENT_NODE) {
-                    switch (t = p.localName, Yb(t, p.constructor)) {
+                    switch (nodeType = p.localName, Yb(nodeType, p.constructor)) {
                         case 0:
                         case 1:
-                            p = Lb(t);
+                            p = Lb(nodeType);
                             r = 1 === p || 6 === p;
                             break;
                         case 3:
@@ -2407,22 +2407,22 @@ var fc = function (a) {
                 return "zClosurez";
             };
         }
-        var v = q.localName;
-        t = c(q);
+        var localName = q.localName;
+        nodeType = c(q);
         switch (r) {
             case "attribute":
-                if (Rb(p) in t) {
+                if (Rb(p) in nodeType) {
                     break;
                 }
                 return function (w) {
                     return w;
                 };
             case "property":
-                if (p in t) {
+                if (p in nodeType) {
                     break;
                 }
                 var z = Sb(p);
-                if (z && z in t) {
+                if (z && z in nodeType) {
                     break;
                 }
                 return function (w) {
@@ -2432,7 +2432,7 @@ var fc = function (a) {
                 throw Error(r + ": " + typeof r);
         }
         var ba = "attribute" == r ? p.toLowerCase() : Qb(p);
-        var ja = Jb(v, ba, ya(b, q));
+        var ja = Jb(localName, ba, ya(b, q));
         var I = f;
         var ca = null;
         return function (w) {
@@ -2445,11 +2445,11 @@ var fc = function (a) {
                 ca = M.P;
                 da && (I = e(w, da, f));
                 I === f && (M.F ? (da = "" + e(w, "STRING", w),
-                    I = M.F(v, ba, da)) : M.D && (I = M.D(v, ba, w)),
+                    I = M.F(localName, ba, da)) : M.D && (I = M.D(localName, ba, w)),
                     I === ca && (I = f));
             }
             I === f && (I = ca || "zClosurez",
-                d && d(true, 'Failed to sanitize attribute of <%s>: <%s %s="%O">', v, v, ba, w));
+                d && d(true, 'Failed to sanitize attribute of <%s>: <%s %s="%O">', localName, localName, ba, w));
             return I;
         };
     };
@@ -3805,12 +3805,12 @@ var Y = function (lightness, b, c, alpha) {
 Y.prototype.La = function (a) {
     return 1E-4 > Math.abs(this.g - a.g) && 1E-4 > Math.abs(this.A - a.A) && 1E-4 > Math.abs(this.B - a.B) && Math.abs(this.alpha - a.alpha) < T;
 };
-var Ed = function (a) {
-    var b = W(a.red);
-    var c = W(a.green);
-    var d = W(a.blue);
+var Ed = function (rgba) {
+    var b = W(rgba.red);
+    var c = W(rgba.green);
+    var d = W(rgba.blue);
     var e = .2126729 * b + .7151522 * c + .072175 * d;
-    return new Y(116 * Dd(e) - 16, 500 * (Dd((.4124564 * b + .3575761 * c + .1804375 * d) / .95047) - Dd(e)), 200 * (Dd(e) - Dd((.0193339 * b + .119192 * c + .9503041 * d) / 1.08883)), a.alpha);
+    return new Y(116 * Dd(e) - 16, 500 * (Dd((.4124564 * b + .3575761 * c + .1804375 * d) / .95047) - Dd(e)), 200 * (Dd(e) - Dd((.0193339 * b + .119192 * c + .9503041 * d) / 1.08883)), rgba.alpha);
 };
 var Fd = function (lightness, chroma, hue, alpha) {
     alpha = void 0 === alpha ? 1 : alpha;
@@ -4384,13 +4384,13 @@ var oe = function (a) {
         }
     };
 };
-function qe(a) {
+function set_primary_color_picker(a) {
     return {
         type: "SET_PRIMARY_COLOR_PICKER",
         color: a
     };
 }
-function re(a) {
+function copy_to_clipboard(a) {
     return {
         type: "COPY_TO_CLIPBOARD",
         selectedColor: a
@@ -4400,16 +4400,16 @@ function se(a) {
     var b = {};
     var c = {
         J: function (d, e) {
-            var l = window;
-            l.gtag && l.gtag("event", d, {
+            var _window = window;
+            _window.gtag && _window.gtag("event", d, {
                 event_category: "inline color tool",
                 event_label: e
             });
         },
         Cd: function (d, e) {
-            var l = this;
+            var _this = this;
             b[d] || (b[d] = Ma(function (h, g) {
-                l.J(h, g);
+                _this.J(h, g);
             }));
             b[d](d, e);
         }
@@ -4480,11 +4480,11 @@ var ze = function () {
 A(ze, $d);
 var Ae = function (a, b, c) {
     a.ha && a.ha.detach();
-    var d = b.currentTarget;
+    var target = b.currentTarget;
     a.ha = ce(b, {
         la: function (e, l) {
-            var h = d.getBoundingClientRect();
-            e = new Bd(c.hue, L((e - h.left) / h.width, 0, 1), 1 - L((l - h.top) / h.height, 0, 1), c.alpha);
+            var rect = target.getBoundingClientRect();
+            e = new Bd(c.hue, L((e - rect.left) / rect.width, 0, 1), 1 - L((l - rect.top) / rect.height, 0, 1), c.alpha);
             a.Nb(e);
         },
         Aa: function () {
@@ -4495,11 +4495,11 @@ var Ae = function (a, b, c) {
 };
 var Be = function (a, b, c) {
     a.ha && a.ha.detach();
-    var d = b.currentTarget;
+    var target = b.currentTarget;
     a.ha = ce(b, {
         la: function (e) {
-            var l = d.getBoundingClientRect();
-            e = new Bd(360 * L((e - l.left) / l.width, 0, 1), c.saturation, c.value, c.alpha);
+            var rect = target.getBoundingClientRect();
+            e = new Bd(360 * L((e - rect.left) / rect.width, 0, 1), c.saturation, c.value, c.alpha);
             a.Nb(e);
         },
         Aa: function () {
@@ -4509,16 +4509,16 @@ var Be = function (a, b, c) {
     })
 };
 ze.prototype.I = function (a) {
-    var b = this;
-    var c = a.color;
+    var _this = this;
+    var color = a.color;
     var d = a.Qa;
     this.Mb = a.ob;
     this.Nb = d;
-    d = c.hue / 360 * 100;
-    var e = 100 * c.saturation;
-    var l = 100 - 100 * c.value;
-    var h = X(new Bd(c.hue, 1, 1));
-    var g = X(c);
+    d = color.hue / 360 * 100;
+    var e = 100 * color.saturation;
+    var l = 100 - 100 * color.value;
+    var h = X(new Bd(color.hue, 1, 1));
+    var g = X(color);
     e = Ce({
         ib: "color-picker-satval__thumb",
         color: g,
@@ -4532,12 +4532,12 @@ ze.prototype.I = function (a) {
         Dc: 50
     });
     h = J({
-        "background-color": "hsl(" + c.hue + ", 100%, 50%)"
+        "background-color": "hsl(" + color.hue + ", 100%, 50%)"
     });
     return Q(ye, function (f) {
-        Ae(b, f, c);
+        Ae(_this, f, color);
     }, h, e, function (f) {
-        Be(b, f, c);
+        Be(_this, f, color);
     }, d, De(this, a));
 };
 var De = function (a, b) {
@@ -4704,13 +4704,13 @@ var df = function (a, b, c, d) {
     var h = a.toFunctionalNotation();
     if (a) {
         var g = 0 === Xd(a) ? Rd.HIGH : Wd.HIGH;
-        var f = g.alpha;
+        var alpha = g.alpha;
         var m = void 0 === m ? 1 : m;
-        for (var rgba = qd(a), u = f - .01, q = m; .01 < q - u;) {
+        for (var rgba = qd(a), u = alpha - .01, q = m; .01 < q - u;) {
             var p = (u + q) / 2;
             4.5 > rd(Math.abs(g.alpha - p) < T ? g : new RGBA(g.red, g.green, g.blue, p), rgba) ? u = p : q = p;
         }
-        m = (new RGBA(g.red, g.green, g.blue, L(q, f, m))).toFunctionalNotation();
+        m = (new RGBA(g.red, g.green, g.blue, L(q, alpha, m))).toFunctionalNotation();
     } else {
         m = "rgba(255, 255, 255, 0.6)";
     }
@@ -4742,7 +4742,7 @@ var ff = function (a, b, c, d, e) {
                 m.value = f,
                     m.select(),
                     document.execCommand("copy"),
-                    a.app.dispatch(re(f));
+                    a.app.dispatch(copy_to_clipboard(f));
             }
         }, d, e));
         return h;
@@ -4807,7 +4807,7 @@ var nf = function (a, b) {
 var kf = function (a, b) {
     var c = X(b.color);
     var d = function (e) {
-        a.app.dispatch(qe(e));
+        a.app.dispatch(set_primary_color_picker(e));
     };
     b = a.qd.I(Object.assign({}, b, {
         Qa: d,
@@ -4892,7 +4892,7 @@ cf.prototype.I = function (a) {
     var d = a.Ca.color && X(a.Ca.color);
     c = a.Ca.color ? jf(this, c, d) : hf(this, c);
     d = Q(Le, a.Ib.Jb ? "clipboard-confirmation--visible" : "", function () {
-        b.app.dispatch(re(""));
+        b.app.dispatch(copy_to_clipboard(""));
     });
     a = nf(this, a);
     return Q(Ke, c, d, a);
@@ -4979,8 +4979,8 @@ var sf = function (a, b) {
     }, a, pf, b, [te()]);
 };
 A(sf, pe);
-var tf = window;
-tf.__MATERIAL = Object.assign({}, tf.__MATERIAL, {
+var _window = window;
+_window.__MATERIAL = Object.assign({}, _window.__MATERIAL, {
     buildVersion: "276519738"
 });
 var uf = ["https://material-io-project.appspot.com", "https://material.io", "https://m2-spec.appspot.com", "https://spec.googleplex.com"];
@@ -5000,10 +5000,10 @@ function vf(a, b) {
 };
 function wf() {
     return {
-        handleError: function (a) {
-            console.error(a);
+        handleError: function (data) {
+            console.error(data);
         },
-        log: function (a) {
+        log: function (data) {
             for (var b = [], c = 0; c < arguments.length; ++c) {
                 b[c - 0] = arguments[c];
             }
@@ -5023,7 +5023,7 @@ function xf() {
         container.classList.add("inline-tool-initializing");
         return new sf(container, wf());
     }, function (b) {
-        b.Eb.dispatch(qe(af));
+        b.Eb.dispatch(set_primary_color_picker(af));
         Promise.resolve().then(function () {
             container.classList.remove("inline-tool-initializing")
         });
