@@ -3754,18 +3754,18 @@ hsla.prototype.toFunctionalNotation = function () {
 hsla.prototype.rotate = function (a) {
     return new hsla((this.hue + a + 360) % 360, this.saturation, this.g, this.alpha);
 };
-var zd = function (a) {
-    var b = Math.max(a.red, a.green, a.blue);
-    var c = Math.min(a.red, a.green, a.blue);
+var rgba2hsla = function (rgba) {
+    var b = Math.max(rgba.red, rgba.green, rgba.blue);
+    var c = Math.min(rgba.red, rgba.green, rgba.blue);
     var d = 0;
     var e = 0;
     var l = L(.5 * (b + c), 0, 1);
-    b - c > T && (b === a.red ? d = 60 * (a.green - a.blue) / (b - c) : b === a.green ? d = 60 * (a.blue - a.red) / (b - c) + 120 : b === a.blue && (d = 60 * (a.red - a.green) / (b - c) + 240),
+    b - c > T && (b === rgba.red ? d = 60 * (rgba.green - rgba.blue) / (b - c) : b === rgba.green ? d = 60 * (rgba.blue - rgba.red) / (b - c) + 120 : b === rgba.blue && (d = 60 * (rgba.red - rgba.green) / (b - c) + 240),
         e = 0 < l && .5 >= l ? L((b - c) / (2 * l), 0, 1) : L((b - c) / (2 - 2 * l), 0, 1));
     d = Math.round(d + 360) % 360;
-    return new hsla(d, e, l, a.alpha);
+    return new hsla(d, e, l, rgba.alpha);
 };
-var Ad = function (a) {
+var Bd2hsla = function (a) {
     var b = L((2 - a.saturation) * a.value / 2, 0, 1);
     var c = 0;
     0 < b && 1 > b && (c = a.saturation * a.value / (.5 > b ? 2 * b : 2 - 2 * b));
@@ -3805,7 +3805,7 @@ var Y = function (lightness, b, c, alpha) {
 Y.prototype.La = function (a) {
     return 1E-4 > Math.abs(this.g - a.g) && 1E-4 > Math.abs(this.A - a.A) && 1E-4 > Math.abs(this.B - a.B) && Math.abs(this.alpha - a.alpha) < T;
 };
-var Ed = function (rgba) {
+var rgba2Y = function (rgba) {
     var b = W(rgba.red);
     var c = W(rgba.green);
     var d = W(rgba.blue);
@@ -4091,7 +4091,7 @@ function Xd(a) {
 };
 function Z(a) {
     var b = void 0 === b ? Kd : b;
-    var c = Ed(a);
+    var c = rgba2Y(a);
     var d = Yd(c, b);
     b = d.fd;
     d = d.ed;
@@ -4558,7 +4558,7 @@ var De = function (a, b) {
     d = J({
         "background-color": "#" + V(b)
     });
-    c = .6 < Ad(c).g ? "color-picker-inputs__swatch--selected" : "";
+    c = .6 < Bd2hsla(c).g ? "color-picker-inputs__swatch--selected" : "";
     return Q(xe, c, d, a);
 };
 function Ce(a) {
@@ -4770,13 +4770,13 @@ var gf = function (a) {
 var hf = function (a, b) {
     var c = [];
     c.push(ff(a, "Primary", [Z(b)], [b], "PRIMARY"));
-    var d = td(zd(b).rotate(180));
+    var d = td(rgba2hsla(b).rotate(180));
     c.push(ff(a, "Complementary", [Z(d)], [d]));
-    d = zd(b);
+    d = rgba2hsla(b);
     d = [d.rotate(-30), d.rotate(30)];
     d = gf(d);
     c.push(ff(a, "Analogous", d.pc, d.yc));
-    b = zd(b);
+    b = rgba2hsla(b);
     b = [b.rotate(60), b.rotate(120)];
     b = gf(b);
     c.push(ff(a, "Triadic", b.pc, b.yc));
