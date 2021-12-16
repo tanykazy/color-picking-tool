@@ -2509,19 +2509,19 @@ var nc = function (a, b) {
     var h = 0;
     var g = a.m;
     for (a = a.values.length; h < a;) {
-        var f = b.nextNode();
-        if (null === f) {
+        var node = b.nextNode();
+        if (null === node) {
             b.currentNode = d.pop();
-        } else if (l++, 1 === f.nodeType) {
-            if (f.hasAttributes()) {
-                for (var m = f.attributes, n = m.length, u = 0, q = 0; q < n; q++) {
+        } else if (l++, 1 === node.nodeType) {
+            if (node.hasAttributes()) {
+                for (var m = node.attributes, n = m.length, u = 0, q = 0; q < n; q++) {
                     lc(m[q].name) && u++;
                 }
                 for (; 0 < u--;) {
                     m = mc.exec(g[h])[2],
                         n = m.toLowerCase() + "$lit$",
-                        q = f.getAttribute(n),
-                        f.removeAttribute(n),
+                        q = node.getAttribute(n),
+                        node.removeAttribute(n),
                         n = q.split(kc),
                         this.H.push({
                             type: "attribute",
@@ -2532,10 +2532,10 @@ var nc = function (a, b) {
                         h += n.length - 1;
                 }
             }
-            "TEMPLATE" === f.tagName && (d.push(f), b.currentNode = f.content);
-        } else if (3 === f.nodeType) {
-            if (m = f.data, 0 <= m.indexOf(O)) {
-                u = f.parentNode;
+            "TEMPLATE" === node.tagName && (d.push(node), b.currentNode = node.content);
+        } else if (3 === node.nodeType) {
+            if (m = node.data, 0 <= m.indexOf(O)) {
+                u = node.parentNode;
                 m = m.split(kc);
                 n = m.length - 1;
                 for (q = 0; q < n; q++) {
@@ -2547,32 +2547,32 @@ var nc = function (a, b) {
                         null !== r && lc(r[2]) && (p = p.slice(0, r.index) + r[1] + r[2].slice(0, -5) + r[3]);
                         p = document.createTextNode(p);
                     }
-                    u.insertBefore(p, f);
+                    u.insertBefore(p, node);
                     this.H.push({
                         type: "node",
                         index: ++l
                     });
                 }
-                "" === m[n] ? (u.insertBefore(P(), f),
-                    c.push(f)) : f.data = m[n];
+                "" === m[n] ? (u.insertBefore(P(), node),
+                    c.push(node)) : node.data = m[n];
                 h += n;
             }
-        } else if (8 === f.nodeType) {
-            if (f.data === O) {
-                u = f.parentNode;
-                if (null === f.previousSibling || l === e) {
+        } else if (8 === node.nodeType) {
+            if (node.data === O) {
+                u = node.parentNode;
+                if (null === node.previousSibling || l === e) {
                     l++,
-                        u.insertBefore(P(), f);
+                        u.insertBefore(P(), node);
                 }
                 e = l;
                 this.H.push({
                     type: "node",
                     index: l
                 });
-                null === f.nextSibling ? f.data = "" : (c.push(f), l--);
+                null === node.nextSibling ? node.data = "" : (c.push(node), l--);
                 h++;
             } else {
-                for (u = -1; -1 !== (u = f.data.indexOf(O, u + 1));) {
+                for (u = -1; -1 !== (u = node.data.indexOf(O, u + 1));) {
                     this.H.push({
                         type: "node",
                         index: -1
