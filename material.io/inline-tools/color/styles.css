@@ -2568,7 +2568,7 @@ body {
     text-transform: uppercase
 }
 
-.color-palette__color-weight-label {
+/* .color-palette__color-weight-label {
     display: inline-block;
     margin-top: 6px;
     width: 10%;
@@ -2576,7 +2576,7 @@ body {
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
     text-align: center
-}
+} */
 
 .utility-panel {
     border-left: 1px solid #e0e0e0;

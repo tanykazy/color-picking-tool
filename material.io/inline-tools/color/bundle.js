@@ -4668,8 +4668,8 @@ var Se = ["", ""];
 Se.raw = Se.slice();
 var Te = ["", ""];
 Te.raw = Te.slice();
-var Ue = ['<div class="color-palette__color-weight-label">', "</div>"];
-Ue.raw = Ue.slice();
+// var Ue = ['<div class="color-palette__color-weight-label">', "</div>"];
+// Ue.raw = Ue.slice();
 var Ve = ['<div class="color-palette__label">', "</div>"];
 Ve.raw = Ve.slice();
 var We = ['\n      <div class="color-palette__row">\n        ', "\n      </div>\n    "];
@@ -4749,7 +4749,7 @@ var ff = function (a, b, c, d, e) {
         return h;
     }, l);
     Ze.reduce(function (h, g) {
-        h.push(Q(Ue, g));
+        // h.push(Q(Ue, g));
         return h;
     }, l);
     return l;
