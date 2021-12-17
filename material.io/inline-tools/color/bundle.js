@@ -3187,8 +3187,8 @@ function Uc() {
     b || (Tc = a);
     return a;
 };
-var Vc = ["touchstart", "pointerdown", "mousedown", "keydown"];
-var Wc = ["touchend", "pointerup", "mouseup", "contextmenu"];
+var start_events = ["touchstart", "pointerdown", "mousedown", "keydown"];
+var end_events = ["touchend", "pointerup", "mouseup", "contextmenu"];
 var Xc = [];
 var R = function (a) {
     Mc.call(this, Object.assign({}, R.Pb, a));
@@ -3292,7 +3292,7 @@ var Yc = function () {
     };
 };
 var dd = function (a, b) {
-    b && (Vc.forEach(function (c) {
+    b && (start_events.forEach(function (c) {
         a.f.Ba(c, a.Db);
     }),
         a.f.ca() && a.f.tc(a.xc));
@@ -3300,12 +3300,12 @@ var dd = function (a, b) {
     a.f.Ba("blur", a.Hb);
 };
 var id = function (a, b) {
-    "keydown" === b.type ? a.f.Ba("keyup", a.Ja) : Wc.forEach(function (c) {
+    "keydown" === b.type ? a.f.Ba("keyup", a.Ja) : end_events.forEach(function (c) {
         a.f.sc(c, a.Ja);
     });
 };
 var gd = function (a) {
-    Vc.forEach(function (b) {
+    start_events.forEach(function (b) {
         a.f.ta(b, a.Db);
     });
     a.f.ta("focus", a.Xb);
@@ -3314,7 +3314,7 @@ var gd = function (a) {
 };
 var hd = function (a) {
     a.f.ta("keyup", a.Ja);
-    Wc.forEach(function (b) {
+    end_events.forEach(function (b) {
         a.f.Rb(b, a.Ja);
     });
 };
@@ -3549,16 +3549,16 @@ var nd = function () {
 A(nd, Nc);
 var od = function (a) {
     return {
-        fa: function (b) {
+        addClass: function (b) {
             return a.X.classList.add(b);
         },
         fb: function () {
             return Uc();
         },
-        qa: function () {
+        getBoundingClientRect: function () {
             return a.X.getBoundingClientRect();
         },
-        Lb: function (b) {
+        contains: function (b) {
             return a.X.contains(b);
         },
         Rb: function (b, c) {
@@ -3570,7 +3570,7 @@ var od = function (a) {
         Sb: function (b) {
             return window.removeEventListener("resize", b);
         },
-        $b: function () {
+        getPageOffset: function () {
             return {
                 x: window.pageXOffset,
                 y: window.pageYOffset
@@ -3580,10 +3580,10 @@ var od = function (a) {
             var b = a.X;
             return (b.matches || b.webkitMatchesSelector || b.msMatchesSelector).call(b, ":active");
         },
-        gc: function () {
+        getDisabled: function () {
             return !!a.disabled;
         },
-        ca: function () {
+        getEc: function () {
             return !!a.Ec;
         },
         sc: function (b, c) {
@@ -3595,7 +3595,7 @@ var od = function (a) {
         tc: function (b) {
             return window.addEventListener("resize", b);
         },
-        O: function (b) {
+        removeClass: function (b) {
             return a.X.classList.remove(b);
         },
         da: function (b, c) {
@@ -3647,7 +3647,7 @@ var RGBA = function (red, green, blue, alpha) {
 RGBA.prototype.toFunctionalNotation = function () {
     return "rgba(" + 100 * this.red + "%, " + 100 * this.green + "%, " + (100 * this.blue + "%, " + this.alpha + ")");
 };
-var V = function (a) {
+var rgba2colorstring = function (a) {
     return hex(Math.round(255 * a.red)) + hex(Math.round(255 * a.green)) + hex(Math.round(255 * a.blue)) + (1 > a.alpha ? hex(Math.round(255 * a.alpha)) : "");
 };
 RGBA.prototype.La = function (a) {
@@ -4548,7 +4548,7 @@ var De = function (a, b) {
     b = X(c);
     a = ve({
         id: "" + a.jd,
-        value: void 0 !== d ? d : V(b),
+        value: void 0 !== d ? d : rgba2colorstring(b),
         ib: "inline-text-field-container",
         maxLength: 6,
         bd: "Hex code",
@@ -4557,7 +4557,7 @@ var De = function (a, b) {
         }
     });
     d = J({
-        "background-color": "#" + V(b)
+        "background-color": "#" + rgba2colorstring(b)
     });
     c = .6 < Bd2hsla(c).g ? "color-picker-inputs__swatch--selected" : "";
     return Q(xe, c, d, a);
@@ -4719,7 +4719,7 @@ var df = function (a, b, c, d) {
         "background-color": h,
         color: m
     });
-    return Q(Xe, e, d, m, c, b, V(a), l);
+    return Q(Xe, e, d, m, c, b, rgba2colorstring(a), l);
 };
 var ef = function (a, b, c, d) {
     var e = a.map(function (l, h) {
@@ -4738,7 +4738,7 @@ var ff = function (a, b, c, d, e) {
     l.push(Q(Ve, b));
     c.reduce(function (h, g) {
         h.push(ef(g, function (f, m) {
-            f = "#" + V(f[m]);
+            f = "#" + rgba2colorstring(f[m]);
             if (m = document.querySelector("#clipboardcopy")) {
                 m.value = f,
                     m.select(),
@@ -4795,7 +4795,7 @@ var nf = function (a, b) {
     b = b.Ca;
     var d = X(c.color);
     var e = b.color && X(b.color);
-    d = "https://material.io/tools/color/#!/?view.left=0&view.right=0&primary.color=" + V(d) + (e ? "&secondary.color=" + V(e) : "");
+    d = "https://material.io/tools/color/#!/?view.left=0&view.right=0&primary.color=" + rgba2colorstring(d) + (e ? "&secondary.color=" + rgba2colorstring(e) : "");
     c = kf(a, c);
     e = lf(a);
     b = b.jb ? mf(a, b, b.color) : a.vc();
@@ -4918,13 +4918,13 @@ function pf(a, b) {
 function qf(a, b) {
     a = void 0 === a ? {
         color: bf,
-        M: V(X(bf))
+        M: rgba2colorstring(X(bf))
     } : a;
     switch (b.type) {
         case "SET_PRIMARY_COLOR_PICKER":
             return Object.assign({}, a, {
                 color: b.color,
-                M: V(X(b.color))
+                M: rgba2colorstring(X(b.color))
             });
         case "SET_PRIMARY_HEX_COLOR":
             return Object.assign({}, a, {
@@ -4941,7 +4941,7 @@ function qf(a, b) {
 function rf(a, b) {
     a = void 0 === a ? {
         color: void 0,
-        M: V(X(bf)),
+        M: rgba2colorstring(X(bf)),
         jb: false
     } : a;
     switch (b.type) {
@@ -4953,7 +4953,7 @@ function rf(a, b) {
         case "SET_SECONDARY_COLOR_PICKER":
             return Object.assign({}, a, {
                 color: b.color,
-                M: V(X(b.color))
+                M: rgba2colorstring(X(b.color))
             });
         case "SET_SECONDARY_HEX_COLOR":
             return Object.assign({}, a, {
@@ -4967,7 +4967,7 @@ function rf(a, b) {
         case "REMOVE_SECONDARY_COLOR":
             return Object.assign({}, a, {
                 color: void 0,
-                M: V(X(bf)),
+                M: rgba2colorstring(X(bf)),
                 jb: false
             });
         default:
