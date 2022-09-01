@@ -27,7 +27,13 @@
  * SOFTWARE.
  */
 !function (t, e) {
-    "object" == typeof exports && "object" == typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define([], e) : "object" == typeof exports ? exports.Redux = e() : t.Redux = e();
+    "object" == typeof exports && "object" == typeof module ?
+        module.exports = e() :
+        "function" == typeof define && define.amd ?
+            define([], e) :
+            "object" == typeof exports ?
+                exports.Redux = e() :
+                t.Redux = e();
 }(this, function () {
     return function (t) {
         function e(r) {
@@ -4984,51 +4990,51 @@ var _window = window;
 _window.__MATERIAL = Object.assign({}, _window.__MATERIAL, {
     buildVersion: "276519738"
 });
-var uf = ["https://material-io-project.appspot.com", "https://material.io", "https://m2-spec.appspot.com", "https://spec.googleplex.com"];
-function vf(a, b) {
-    var c = a();
-    c.start();
-    var d = false;
-    window.addEventListener("message", function (e) {
-        uf.includes(e.origin);
-        e.data.animate && !d && (d = true,
-            b(c),
-            e = window,
-            e.gtag && e.gtag("event", "tool view", {
-                event_category: "inline color tool"
-            }));
-    });
-};
-function wf() {
-    return {
-        handleError: function (data) {
-            console.error(data);
-        },
-        log: function (data) {
-            for (var b = [], c = 0; c < arguments.length; ++c) {
-                b[c - 0] = arguments[c];
-            }
-            console.log.apply(console, ma(b));
-        },
-        getInitialState: function () {
-            return {};
-        },
-        actionDispatched: function () { },
-        panelSizeChanged: function () { },
-        stateChanged: function () { }
-    };
-};
-function xf() {
-    var container = root_container;
-    vf(function () {
-        container.classList.add("inline-tool-initializing");
-        return new sf(container, wf());
-    }, function (b) {
-        b.Eb.dispatch(set_primary_color_picker(af));
-        Promise.resolve().then(function () {
-            container.classList.remove("inline-tool-initializing")
-        });
-    });
-}
+// var uf = ["https://material-io-project.appspot.com", "https://material.io", "https://m2-spec.appspot.com", "https://spec.googleplex.com"];
+// function vf(a, b) {
+//     var c = a();
+//     c.start();
+//     var d = false;
+//     window.addEventListener("message", function (e) {
+//         uf.includes(e.origin);
+//         e.data.animate && !d && (d = true,
+//             b(c),
+//             e = window,
+//             e.gtag && e.gtag("event", "tool view", {
+//                 event_category: "inline color tool"
+//             }));
+//     });
+// };
+// function wf() {
+//     return {
+//         handleError: function (data) {
+//             console.error(data);
+//         },
+//         log: function (data) {
+//             for (var b = [], c = 0; c < arguments.length; ++c) {
+//                 b[c - 0] = arguments[c];
+//             }
+//             console.log.apply(console, ma(b));
+//         },
+//         getInitialState: function () {
+//             return {};
+//         },
+//         actionDispatched: function () { },
+//         panelSizeChanged: function () { },
+//         stateChanged: function () { }
+//     };
+// };
+// function xf() {
+//     var container = root_container;
+//     // vf(function () {
+//     //     container.classList.add("inline-tool-initializing");
+//     //     return new sf(container, wf());
+//     // }, function (b) {
+//     //     b.Eb.dispatch(set_primary_color_picker(af));
+//     //     Promise.resolve().then(function () {
+//     //         container.classList.remove("inline-tool-initializing")
+//     //     });
+//     // });
+// }
 var root_container = document.querySelector("#root-container");
-root_container && xf();
+// root_container && xf();
