@@ -1,1 +1,1 @@
-[Color tool](https://material.io/inline-tools/color)
+[Color tool](./material.io/inline-tools/color/)
